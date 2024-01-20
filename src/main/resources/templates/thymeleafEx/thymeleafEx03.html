@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Product List output example</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <td>No.</td>
+                <td>Product Name</td>
+                <td>Product Detail</td>
+                <td>Product Price</td>
+                <td>Product Register</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="itemDto, status: ${itemDtoList}"> // Status contains status data for the current iteration.
+                                                           // You can use a different variable name instead of status.
+                <td th:text="${status.index}"></td>        // Output index of data currently being traversed.
+                                                           // One of the options that appears when you write status+"."
+                <td th:text="${itemDto.itemNm}"></td>
+                <td th:text="${itemDto.itemDetail}"></td>
+                <td th:text="${itemDto.price}"></td>
+                <td th:text="${itemDto.regTime}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
