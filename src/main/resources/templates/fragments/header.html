@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!-- Add namespace to use Spring Security tags -->
 
     <div th:fragment="header">
         <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
@@ -12,22 +14,28 @@
 
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-item">
+                    <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+                        <!-- If you log in with an administrator account (ADMIN ROLE), the product registration and product management menus are displayed. -->
                         <a class="nav-link" href="/admin/item/new">Product Registration</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+                        <!-- If you log in with an administrator account (ADMIN ROLE), the product registration and product management menus are displayed. -->
                         <a class="nav-link" href="/admin/items">Product Management</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <!-- The shopping cart and purchase history pages are displayed only when logged in (authenticated). -->
                         <a class="nav-link" href="/cart">Cart</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <!-- The shopping cart and purchase history pages are displayed only when logged in (authenticated). -->
                         <a class="nav-link" href="/orders">Purchase History</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" sec:authorize="isAnonymous()">
+                        <!-- If you are not logged in, the login menu is displayed. -->
                         <a class="nav-link" href="/members/login">Login</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <!-- If you are logged in, the logout menu is displayed. -->
                         <a class="nav-link" href="/members/logout">Logout</a>
                     </li>
                 </ul>
