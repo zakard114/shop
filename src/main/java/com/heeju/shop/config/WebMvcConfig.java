@@ -8,7 +8,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
-
+    // This is where the basic settings for MVC settings are set. This part can be defined in advance in Spring and
+    // used as is, but it can also be used by overriding and modifying the part.
     @Value("${uploadPath}") // Read the “uploadPath” property value set in application.properties.
     String uploadPath;
 

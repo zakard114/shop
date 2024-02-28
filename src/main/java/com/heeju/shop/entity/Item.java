@@ -2,18 +2,16 @@ package com.heeju.shop.entity;
 
 import com.heeju.shop.constant.ItemSellStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
-@Data
+@Getter @Setter
 @Table(name = "item") // Maps with DB’s item table
 @AllArgsConstructor
 @NoArgsConstructor
-public class Item {
+public class Item extends BaseEntity {
 
     @Id
     @Column(name = "item_id")
@@ -35,10 +33,5 @@ public class Item {
 
     @Enumerated(EnumType.STRING)
     private ItemSellStatus itemSellStatus;
-
-    private LocalDateTime regTime;
-
-    private LocalDateTime updateTime;
-
 
 }

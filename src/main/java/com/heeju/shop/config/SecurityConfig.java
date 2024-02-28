@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -73,7 +72,9 @@ public class SecurityConfig {
                 .invalidateHttpSession(true)); // Existing user sessions are also deleted through invalidateHttpSession.
 
         // http.authorizeRequest(): This means using HttpServletRequest for security processing.
-        http.authorizeRequests().requestMatchers("/","/members/**","/item/**","/images/**").permitAll()
+        http.authorizeRequests()
+                .requestMatchers("/favicon.ico", "/error").permitAll() // source: https://doongi9.tistory.com/entry/Spring-Boot-status999errorNonemessageNo-message-available
+                .requestMatchers("/","/members/**","/item/**","/images/**").permitAll()
                 // Set all users to access the path without authentication (login) through permitAll().
                 // This includes the main page, member-related URL, product detail page to be created later,
                 // and path to load product images.
@@ -102,16 +103,13 @@ public class SecurityConfig {
         return (web) -> web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
 
-
-
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(memberService)
-                .passwordEncoder(passwordEncoder());
-
-    }
-
-
-
+//
+//
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.userDetailsService(memberService)
+//                .passwordEncoder(passwordEncoder());
+//
+//    }
 
     @Bean
     public PasswordEncoder passwordEncoder(){

@@ -30,9 +30,9 @@ class ItemRepositoryTest {
 
     @PersistenceContext
     EntityManager em; // Inject EntityManager bean using @PersistenceContext
-                      // to use persistence context.
-                      // concurrency problems do not occur when EntityManager
-                      // is injected with @PersistenceContext.
+    // to use persistence context.
+    // concurrency problems do not occur when EntityManager
+    // is injected with @PersistenceContext.
 
     @Autowired
     ItemRepository itemRepository;

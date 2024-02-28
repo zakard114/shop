@@ -5,12 +5,14 @@ import com.heeju.shop.dto.MemberFormDto;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Entity
-@Data
+@Getter @Setter
 @Table(name = "member")
-public class Member {
+// Inherit BaseEntity class to apply Auditing to Member entity
+public class Member extends BaseEntity {
 
     @Id
     @Column(name = "member_id")
